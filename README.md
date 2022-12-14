@@ -1,4 +1,4 @@
-# ipci-dapp
+# dapp-dao-ipci-everscale
 
 ## Project setup
 ```
