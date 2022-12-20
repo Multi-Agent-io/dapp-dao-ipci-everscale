@@ -1,59 +1,10 @@
 <template>
-  <div class="header">
-    <div class="item">
-      <h1>dao IPCI everscale</h1>
-    </div>
-    <Account
-      class="item"
-      v-if="ready"
-      @account="r => (account = r)"
-      @auditor="r => (isAuditor = r)"
-      @owner="r => (isOwner = r)"
-    />
-  </div>
-  <div class="container">
-    <template v-if="ready">
-      <AddAuditor class="block" v-if="isOwner" />
-      <Deploy class="block" :account="account" v-if="isAuditor" />
-      <Token class="block" :account="account" :isAuditor="isAuditor" />
-    </template>
-    <div v-else-if="error" class="error">{{ error }}</div>
-    <div v-else class="loader">...</div>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import Account from "./components/Account.vue";
-import AddAuditor from "./components/AddAuditor.vue";
-import Deploy from "./components/Deploy.vue";
-import Token from "./components/Token.vue";
-import { initEver } from "./ever";
-
 export default {
-  name: "App",
-  components: {
-    Account,
-    AddAuditor,
-    Deploy,
-    Token
-  },
-  data() {
-    return {
-      ready: false,
-      account: "",
-      isOwner: false,
-      isAuditor: false,
-      error: null
-    };
-  },
-  async created() {
-    try {
-      await initEver();
-      this.ready = true;
-    } catch (error) {
-      this.error = error.message;
-    }
-  }
+  name: "App"
 };
 </script>
 
@@ -110,6 +61,24 @@ button:disabled {
   color: #5e5e61;
   cursor: auto;
 }
+button.success {
+  border: 1px solid #5eb449;
+  background-color: #73eb91;
+  padding: 10px;
+  color: #5e5e61;
+}
+button.success:hover {
+  background-color: #5fbd77;
+}
+button.error {
+  border: 1px solid #b44949;
+  background-color: #e76b5b;
+  padding: 10px;
+  color: #f1f3ff;
+}
+button.error:hover {
+  background-color: #8b3d32;
+}
 input {
   border: 1px solid #495db4;
   padding: 10px;
@@ -132,6 +101,11 @@ table td {
   border: 1px solid #5eb449;
   background-color: #73eb91;
   padding: 10px;
+}
+.success a {
+  text-decoration: none;
+  color: #0b62a8;
+  font-size: 12px;
 }
 .error {
   border: 1px solid #b44949;
@@ -174,5 +148,10 @@ h6 {
 .loader {
   text-align: center;
   margin: 50px;
+}
+.request-message {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #0b62a8;
 }
 </style>

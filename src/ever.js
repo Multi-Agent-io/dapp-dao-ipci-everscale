@@ -70,6 +70,33 @@ export async function addAuditor(factory, address) {
     });
 }
 
+export async function checkUserDeployRoot(factory, user, body) {
+  const assetFactory = getFactory(factory);
+  const res = await assetFactory.decodeInputMessage({
+    body: body,
+    methods: ["deployRoot"],
+    internal: true
+  });
+  if (res) {
+    return res.input.initialSupplyTo.equals(toAddress(user));
+  }
+  return false;
+}
+
+export async function getSubscriber() {
+  return await new provider.Subscriber();
+}
+
+export async function events(subscriber, factory, eventName, sender) {
+  const assetFactory = getFactory(factory);
+  return assetFactory.events(subscriber).filter(tx => {
+    return (
+      tx.event === eventName &&
+      tx.transaction.inMessage.src.equals(toAddress(sender))
+    );
+  });
+}
+
 export async function deployRoot(factory, params) {
   const assetFactory = getFactory(factory);
 
