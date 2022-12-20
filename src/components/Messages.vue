@@ -72,8 +72,8 @@ export default {
       this.messages[i].load = false;
     },
     async deploy(id) {
+      const i = this.messages.findIndex(item => item.id === id);
       try {
-        const i = this.messages.findIndex(item => item.id === id);
         const result = await deployRoot(config.factory, {
           answerId: 0,
           name: this.messages[i].tokenName,
