@@ -2,19 +2,13 @@
   <div>
     <h3>Add auditor</h3>
 
-    <table>
-      <tr>
-        <td class="text-right" style="width: 50%">Address:</td>
-        <td>
-          <input v-model="newAuditorAddress" />
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center">
-          <button @click="submit" :disabled="load">Add</button>
-        </td>
-      </tr>
-    </table>
+    <div class="input">
+      <label>Address:</label>
+      <input v-model="newAuditorAddress" />
+    </div>
+    <div class="text-center">
+      <button @click="submit" :disabled="load">Add</button>
+    </div>
 
     <div v-if="transaction" class="success">{{ transaction }}</div>
     <div v-if="error" class="error">{{ error }}</div>

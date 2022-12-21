@@ -2,19 +2,13 @@
   <div>
     <h4>Burn</h4>
 
-    <table>
-      <tr>
-        <td class="text-right" style="width: 50%">Amount:</td>
-        <td>
-          <input v-model="amount" />
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center">
-          <button @click="burn" :disabled="isDisabled">burn</button>
-        </td>
-      </tr>
-    </table>
+    <div class="input">
+      <label>Amount:</label>
+      <input v-model="amount" />
+    </div>
+    <div class="text-center">
+      <button @click="burn" :disabled="isDisabled">burn</button>
+    </div>
 
     <div v-if="error" class="error">{{ error }}</div>
   </div>

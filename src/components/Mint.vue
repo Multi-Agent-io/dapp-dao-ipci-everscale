@@ -2,25 +2,17 @@
   <div>
     <h4>Mint</h4>
 
-    <table>
-      <tr>
-        <td class="text-right" style="width: 50%">User:</td>
-        <td>
-          <input v-model="user" />
-        </td>
-      </tr>
-      <tr>
-        <td class="text-right">Amount:</td>
-        <td>
-          <input v-model="amount" />
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center">
-          <button @click="mint" :disabled="isDisabled">mint</button>
-        </td>
-      </tr>
-    </table>
+    <div class="input">
+      <label>User:</label>
+      <input v-model="user" />
+    </div>
+    <div class="input">
+      <label>Amount:</label>
+      <input v-model="amount" />
+    </div>
+    <div class="text-center">
+      <button @click="mint" :disabled="isDisabled">mint</button>
+    </div>
 
     <div v-if="error" class="error">{{ error }}</div>
   </div>

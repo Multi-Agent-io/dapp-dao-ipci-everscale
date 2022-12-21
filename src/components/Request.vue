@@ -1,37 +1,26 @@
 <template>
   <div>
     <h3>Request to create token</h3>
-    <table v-if="name">
-      <tr>
-        <td class="text-right">Name:</td>
-        <td>
-          <input v-model="name" />
-        </td>
-      </tr>
-      <tr>
-        <td class="text-right">Symbol:</td>
-        <td>
-          <input v-model="symbol" />
-        </td>
-      </tr>
-      <tr>
-        <td class="text-right">Log ipfs hash:</td>
-        <td>
-          <input v-model="log" />
-        </td>
-      </tr>
-      <tr>
-        <td class="text-right">Auditor:</td>
-        <td>
-          <input v-model="auditor" />
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center">
-          <button @click="send" :disabled="!status">send</button>
-        </td>
-      </tr>
-    </table>
+    <div class="input">
+      <label>Name:</label>
+      <input v-model="name" />
+    </div>
+    <div class="input">
+      <label>Symbol:</label>
+      <input v-model="symbol" />
+    </div>
+    <div class="input">
+      <label>Log ipfs hash:</label>
+      <input v-model="log" />
+    </div>
+    <div class="input">
+      <label>Auditor:</label>
+      <input v-model="auditor" />
+    </div>
+    <div class="text-center">
+      <button @click="send" :disabled="!status">send</button>
+    </div>
+
     <div v-if="token" class="success">
       <a :href="`${tokenExplorer(token)}`" target="_blank">
         View explorer {{ token }}

@@ -155,4 +155,15 @@ h6 {
   padding: 5px;
   border: 1px solid #0b62a8;
 }
+.input {
+  margin: 5px;
+  padding: 5px;
+}
+.input label {
+  display: block;
+  font-size: 14px;
+}
+.input input {
+  width: 100%;
+}
 </style>
