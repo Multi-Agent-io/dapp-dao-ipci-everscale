@@ -47,6 +47,7 @@ import { checkUserDeployRoot, events, getSubscriber } from "../ever";
 
 export default {
   props: ["account", "status"],
+  emits: ["newToken"],
   data() {
     return {
       name: "TestAsset",
@@ -96,6 +97,7 @@ export default {
         if (isUser) {
           this.token = tx.data.root.toString();
           this.load = false;
+          this.$emit("newToken", this.token);
           await subscriber.unsubscribe();
           return;
         }

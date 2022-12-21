@@ -97,6 +97,11 @@ export async function events(subscriber, factory, eventName, sender) {
   });
 }
 
+export async function getPastEvents(factory) {
+  const assetFactory = getFactory(factory);
+  return assetFactory.getPastEvents({});
+}
+
 export async function deployRoot(factory, params) {
   const assetFactory = getFactory(factory);
 

@@ -79,7 +79,8 @@ button.error {
 button.error:hover {
   background-color: #8b3d32;
 }
-input {
+input,
+select {
   border: 1px solid #495db4;
   padding: 10px;
   color: #222222;

@@ -24,13 +24,18 @@ export default {
   },
   data() {
     return {
-      messages: [],
-      initialSupply: "100"
+      messages: []
     };
   },
   async created() {
-    const ipfs = await this.$ipfs;
+    const messages = localStorage.getItem("messages");
+    try {
+      this.messages = JSON.parse(messages);
+    } catch (error) {
+      this.messages = [];
+    }
 
+    const ipfs = await this.$ipfs;
     ipfs.pubsub.subscribe(config.topic, message => {
       try {
         const { log, tokenName, tokenSymbol, auditor, user } = JSON.parse(
@@ -44,7 +49,7 @@ export default {
           user &&
           auditor === this.account
         ) {
-          this.messages.push({
+          this.messages.unshift({
             id: uuidv4(),
             log,
             tokenName,
@@ -60,18 +65,26 @@ export default {
       }
     });
   },
+  watch: {
+    messages: {
+      handler(newValue) {
+        localStorage.setItem("messages", JSON.stringify(newValue));
+      },
+      deep: true
+    }
+  },
   methods: {
     remove(id) {
       this.messages = this.messages.filter(item => item.id !== id);
     },
-    async success(id) {
-      const i = this.messages.findIndex(item => item.id === id);
+    async success(data) {
+      const i = this.messages.findIndex(item => item.id === data.id);
       this.messages[i].load = true;
       this.messages[i].error = null;
-      await this.deploy(id);
+      await this.deploy(data.id, data.initialSupply);
       this.messages[i].load = false;
     },
-    async deploy(id) {
+    async deploy(id, initialSupply) {
       const i = this.messages.findIndex(item => item.id === id);
       try {
         const result = await deployRoot(config.factory, {
@@ -81,7 +94,7 @@ export default {
           decimals: 9,
           owner: this.account,
           initialSupplyTo: toAddress(this.messages[i].user),
-          initialSupply: toNano(this.initialSupply),
+          initialSupply: toNano(initialSupply),
           deployWalletValue: toNano(0.2),
           mintDisabled: false,
           burnByRootDisabled: false,

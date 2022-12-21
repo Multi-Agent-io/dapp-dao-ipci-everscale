@@ -14,8 +14,18 @@
   <div class="container">
     <template v-if="ready">
       <AddAuditor class="block" v-if="isOwner" />
-      <Request class="block" :account="account" :status="ipfs" />
-      <Token class="block" :account="account" :isAuditor="isAuditor" />
+      <Request
+        class="block"
+        :account="account"
+        :status="ipfs"
+        @newToken="v => $refs.Token.getTokens()"
+      />
+      <Token
+        ref="Token"
+        class="block"
+        :account="account"
+        :isAuditor="isAuditor"
+      />
     </template>
     <div v-else-if="error" class="error">{{ error }}</div>
     <div v-else class="loader">...</div>

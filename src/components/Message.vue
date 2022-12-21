@@ -16,7 +16,17 @@
       <tr>
         <td class="text-right">Log:</td>
         <td style="">
-          <small>{{ item.log }}</small>
+          <small>
+            <a :href="`https://ipfs.io/ipfs/${item.log}`" target="_blank">
+              {{ item.log }}
+            </a>
+          </small>
+        </td>
+      </tr>
+      <tr v-if="!item.token">
+        <td class="text-right">Initial supply:</td>
+        <td style="">
+          <input v-model="initialSupply" />
         </td>
       </tr>
       <tr v-if="item.token">
@@ -34,7 +44,12 @@
       </tr>
       <tr v-if="!item.token">
         <td colspan="2" class="text-center">
-          <button @click="$emit('success', item.id)" :disabled="item.load">
+          <button
+            @click="
+              $emit('success', { id: item.id, initialSupply: initialSupply })
+            "
+            :disabled="item.load"
+          >
             ok
           </button>
           <button
@@ -61,6 +76,11 @@ import config from "../config";
 export default {
   props: ["item"],
   emits: ["success"],
+  data() {
+    return {
+      initialSupply: "100"
+    };
+  },
   computed: {
     tokenExplorer() {
       return v => {
