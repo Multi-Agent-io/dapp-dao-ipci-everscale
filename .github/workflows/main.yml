@@ -35,4 +35,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: multi-agent.io
+          cname: dapp-ipci-everscale.multi-agent.io
