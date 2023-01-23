@@ -28,9 +28,12 @@ export default {
     };
   },
   async created() {
-    const messages = localStorage.getItem("messages");
+    let messages = localStorage.getItem("messages");
     try {
-      this.messages = JSON.parse(messages);
+      messages = JSON.parse(messages);
+      if (messages === null) {
+        this.messages = [];
+      }
     } catch (error) {
       this.messages = [];
     }
