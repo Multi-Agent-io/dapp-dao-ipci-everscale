@@ -1,8 +1,8 @@
 export default {
-  // testnet
-  factory: "0:05e30bf3eae57adf9f5b6e45d4f55ffbb0dbf6e9b8d7441a67167631ce2675eb",
+  // mainnet
+  factory: "0:e54c6a9817b5c5a24fd3496cbaa0aefa7dc6a59cf8e3f896f5567029626ce459",
   asset: "",
 
-  explorer: "https://net.ever.live",
+  explorer: "https://ever.live",
   topic: "airalab.lighthouse.5.robonomics.eth"
 };
